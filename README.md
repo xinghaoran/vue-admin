@@ -2,6 +2,8 @@
 
 ## Build Setup
 
+安装cnpm ：npm install -g cnpm --registry=https://registry.npm.taobao.org
+
 ``` bash
 
 # Clone project
