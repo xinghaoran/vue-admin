@@ -2,9 +2,12 @@
 
 ## Build Setup
 
-安装cnpm ：npm install -g cnpm --registry=https://registry.npm.taobao.org
+
 
 ``` bash
+
+#安装cnpm
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 # Clone project
 git clone https://github.com/xinghaoran/vue-admin.git
