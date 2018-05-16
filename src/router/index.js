@@ -79,22 +79,26 @@ export const constantRouterMap = [
         meta: {title: 'Tree', icon: 'tree'}
       }
     ]
+  },
+  {
+    path: '/charts',
+    component: Layout,
+    // redirect: 'noredirect',
+    alwaysShow: true,
+    name: 'charts',
+    meta: {
+      title: 'charts',
+      icon: 'chart'
+    },
+    children: [
+      {
+        path: 'mixchart',
+        component: _import('charts/mixChart'),
+        name: 'mixChart',
+        meta: {title: 'mixChart', noCache: true}
+      }
+    ]
   }
-  // ,
-  // {
-  //   path: '/charts',
-  //   component: Layout,
-  //   redirect: 'noredirect',
-  //   alwaysShow: true,
-  //   name: 'charts',
-  //   meta: {
-  //     title: 'charts',
-  //     icon: 'chart'
-  //   },
-  //   children: [
-  //     { path: 'mixchart', component: _import('charts/mixChart'), name: 'mixChart', meta: { title: 'mixChart', noCache: true }}
-  //   ]
-  // }
   // {
   //   path: '/form',
   //   component: Layout,
