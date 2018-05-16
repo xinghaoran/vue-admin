@@ -96,6 +96,12 @@ export const constantRouterMap = [
         component: _import('charts/mixChart'),
         name: 'mixChart',
         meta: {title: 'mixChart', noCache: true}
+      },
+      {
+        path: 'linechart',
+        component: _import('charts/LineChart'),
+        name: 'lineChart',
+        meta: {title: 'lineChart', noCache: true}
       }
     ]
   }
