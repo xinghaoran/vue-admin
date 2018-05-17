@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import {generateTitle} from '@/utils/i18n'
+  import { generateTitle } from '@/utils/i18n'
 
   export default {
     name: 'SidebarItem',
