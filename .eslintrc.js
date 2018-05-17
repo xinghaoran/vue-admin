@@ -24,7 +24,7 @@ module.exports = {
   },
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
-  rules: {
+  'rules': {
     'accessor-pairs': 2,
     'arrow-spacing': [2, {
       'before': true,
@@ -76,7 +76,7 @@ module.exports = {
     'no-class-assign': 2,
     'no-cond-assign': 2,
     'no-const-assign': 2,
-    'no-control-regex': 2,
+    'no-control-regex': 0,
     'no-delete-var': 2,
     'no-dupe-args': 2,
     'no-dupe-class-members': 2,
@@ -172,7 +172,7 @@ module.exports = {
       'after': true
     }],
     'space-before-blocks': [2, 'always'],
-    'space-before-function-paren': [1, 'always'],
+    'space-before-function-paren': [2, 'never'],
     'space-in-parens': [2, 'never'],
     'space-infix-ops': 2,
     'space-unary-ops': [2, {
@@ -190,9 +190,9 @@ module.exports = {
     'yoda': [2, 'never'],
     'prefer-const': 2,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // 'object-curly-spacing': [2, 'always', {
-    //   objectsInObjects: false
-    // }],
+    'object-curly-spacing': [2, 'always', {
+      objectsInObjects: false
+    }],
     'array-bracket-spacing': [2, 'never']
   }
 }

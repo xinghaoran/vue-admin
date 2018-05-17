@@ -32,7 +32,7 @@
   }
 
   export default {
-    name: 'LineChart',
+    //  name: 'LineChart',// 不写该属性的话默认导出文件名
     components: { lineChart },
     data() {
       return {

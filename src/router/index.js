@@ -61,7 +61,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: {title: 'Example', icon: 'example'},
+    meta: {title: 'example', icon: 'example'},
     children: [
       {
         path: 'table',
@@ -69,14 +69,14 @@ export const constantRouterMap = [
         // 两种设置component方法都可以，前者为函数形式，后者配置形式
         // component: () => import('@/views/table/index'),
         component: _import('table/index'),
-        meta: {title: 'Table', icon: 'table'}
+        meta: {title: 'table', icon: 'table'}
       },
       {
         path: 'tree',
         name: 'Tree',
         // component: () => import('@/views/tree/index'),
         component: _import('tree/index'),
-        meta: {title: 'Tree', icon: 'tree'}
+        meta: {title: 'tree', icon: 'tree'}
       }
     ]
   },
@@ -105,20 +105,6 @@ export const constantRouterMap = [
       }
     ]
   }
-  // {
-  //   path: '/form',
-  //   component: Layout,
-  //   hidden: false,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Form',
-  //       component: () => import('@/views/form/index'),
-  //       meta: {title: 'Form', icon: 'form', roles: ['admin']}
-  //     }
-  //   ]
-  // },
-  // {path: '*', redirect: '/404', hidden: true}
 ]
 
 export const asyncRouterMap = [
@@ -133,9 +119,19 @@ export const asyncRouterMap = [
         name: 'Form',
         // component: () => import('@/views/form/index'),
         component: _import('form/index'),
-        meta: {title: 'Form', icon: 'form', roles: ['admin']}
+        meta: {title: 'form', icon: 'form', roles: ['admin']}
       }
     ]
+  },
+  {
+    path: '/i18n',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: _import('i18n-demo/index'),
+      name: 'i18n',
+      meta: {title: 'i18n', icon: 'international'}
+    }]
   },
   {path: '*', redirect: '/404', hidden: true}
 ]

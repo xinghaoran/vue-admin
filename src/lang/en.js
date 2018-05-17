@@ -25,7 +25,7 @@ export default {
     lineChart: 'Line Chart',
     mixChart: 'Mix Chart',
     example: 'Example',
-    Table: 'Table',
+    table: 'Table',
     dynamicTable: 'Dynamic Table',
     dragTable: 'Drag Table',
     inlineEditTable: 'Inline Edit',
@@ -49,9 +49,7 @@ export default {
     theme: 'Theme',
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
-    Example: 'Example',
-    Form: 'Form',
-    Tree: 'Tree'
+    tree: 'Tree'
   },
   navbar: {
     logOut: 'Log Out',
