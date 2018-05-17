@@ -5,7 +5,7 @@ import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-// import locale from 'element-ui/lib/locale/lang/en'
+// import locale from 'element-ui/lib/locale/lang/en' 
 
 import '@/styles/index.scss' // global css
 
