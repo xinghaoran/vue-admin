@@ -33,7 +33,7 @@
         let matched = this.$route.matched.filter(item => item.name)// 筛选出路由表中路由的名字
         const first = matched[0]
         if (first && first.name !== 'dashboard') {
-          matched = [{path: '/dashboard', meta: {title: 'dashboard'}}].concat(matched)
+          matched = [{ path: '/dashboard', meta: { title: 'dashboard' }}].concat(matched)
         }
         this.levelList = matched
       }

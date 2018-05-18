@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import {isvalidUsername} from '@/utils/validate'
+  import { isvalidUsername } from '@/utils/validate'
 
   export default {
     name: 'login',
@@ -63,8 +63,8 @@
           // password: 'admin'
         },
         loginRules: {
-          username: [{required: true, trigger: 'blur', validator: validateUsername}],
-          password: [{required: true, trigger: 'blur', validator: validatePass}]
+          username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+          password: [{ required: true, trigger: 'blur', validator: validatePass }]
         },
         loading: false,
         pwdType: 'password'
@@ -84,7 +84,7 @@
             this.loading = true
             this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
               this.loading = false
-              this.$router.push({path: '/'})
+              this.$router.push({ path: '/' })
             }).catch(() => {
               this.loading = false
             })
