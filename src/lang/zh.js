@@ -49,7 +49,8 @@ export default {
     exportZip: 'Export Zip',
     theme: '换肤',
     clipboardDemo: 'Clipboard',
-    i18n: '国际化'
+    i18n: '国际化',
+    overview: '舰艇概况'
   },
   navbar: {
     logOut: '退出登录',

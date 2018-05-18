@@ -31,8 +31,8 @@ export const constantRouterMap = [
   // 注释部分为原模板代码没有加入根据环境是否需要懒加载的功能，所有都是懒加载
   // { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   // { path: '/404', component: () => import('@/views/404'), hidden: true },
-  {path: '/login', component: _import('login/index'), hidden: true},
-  {path: '/404', component: _import('errorPage/404'), hidden: true},
+  { path: '/login', component: _import('login/index'), hidden: true },
+  { path: '/404', component: _import('errorPage/404'), hidden: true },
 
   // {
   //   path: '/',
@@ -53,7 +53,7 @@ export const constantRouterMap = [
       path: 'dashboard',
       component: _import('dashboard/index'),
       name: 'dashboard',
-      meta: {title: 'dashboard', icon: 'dashboard', noCache: true}
+      meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
     }]
   },
   {
@@ -61,7 +61,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: {title: 'example', icon: 'example'},
+    meta: { title: 'example', icon: 'example' },
     children: [
       {
         path: 'table',
@@ -69,14 +69,14 @@ export const constantRouterMap = [
         // 两种设置component方法都可以，前者为函数形式，后者配置形式
         // component: () => import('@/views/table/index'),
         component: _import('table/index'),
-        meta: {title: 'table', icon: 'table'}
+        meta: { title: 'table', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
         // component: () => import('@/views/tree/index'),
         component: _import('tree/index'),
-        meta: {title: 'tree', icon: 'tree'}
+        meta: { title: 'tree', icon: 'tree' }
       }
     ]
   },
@@ -95,13 +95,13 @@ export const constantRouterMap = [
         path: 'mixchart',
         component: _import('charts/mixChart'),
         name: 'mixChart',
-        meta: {title: 'mixChart', noCache: true}
+        meta: { title: 'mixChart', noCache: true }
       },
       {
         path: 'linechart',
         component: _import('charts/LineChart'),
         name: 'lineChart',
-        meta: {title: 'lineChart', noCache: true}
+        meta: { title: 'lineChart', noCache: true }
       }
     ]
   }
@@ -112,14 +112,14 @@ export const asyncRouterMap = [
     path: '/form',
     component: Layout,
     hidden: false,
-    meta: {roles: ['admin']}, // 如果不設置此處的權限则会出现空白菜单
+    meta: { roles: ['admin'] }, // 如果不設置此處的權限则会出现空白菜单
     children: [
       {
         path: 'index',
         name: 'Form',
         // component: () => import('@/views/form/index'),
         component: _import('form/index'),
-        meta: {title: 'form', icon: 'form', roles: ['admin']}
+        meta: { title: 'form', icon: 'form', roles: ['admin'] }
       }
     ]
   },
@@ -130,14 +130,24 @@ export const asyncRouterMap = [
       path: 'index',
       component: _import('i18n-demo/index'),
       name: 'i18n',
-      meta: {title: 'i18n', icon: 'international'}
+      meta: { title: 'i18n', icon: 'international' }
     }]
   },
-  {path: '*', redirect: '/404', hidden: true}
+  {
+    path: '/overview',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: _import('overview/index'),
+      name: 'overview',
+      meta: { title: 'overview', icon: 'international' }
+    }]
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 export default new Router({
   // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })

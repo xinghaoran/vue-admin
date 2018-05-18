@@ -49,7 +49,8 @@ export default {
     theme: 'Theme',
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
-    tree: 'Tree'
+    tree: 'Tree',
+    overview: 'Overview'
   },
   navbar: {
     logOut: 'Log Out',
