@@ -58,92 +58,90 @@
 </template>
 
 <script>
-  import InfoTable from '@/components/InfoTable'
-  import pieChart from '@/components/Charts/pieChart'
-  import mixChart from '@/components/Charts/mixChart'
+import InfoTable from '@/components/InfoTable'
+import pieChart from '@/components/Charts/pieChart'
+import mixChart from '@/components/Charts/mixChart'
 
-  export default {
-    name: 'index',
-    data() {
-      return {
-        activeName: 'first',
-        tableData: [
-          {
-            infotext: '现役舰船数：',
-            infovalue: '449'
-          },
-          {
-            infotext: '总吨位：',
-            infovalue: '2496'
-          },
-          {
-            infotext: '在修舰船数：',
-            infovalue: '25'
-          },
-          {
-            infotext: '在航舰船数：',
-            infovalue: '424'
-          },
-          {
-            infotext: '在航率：',
-            infovalue: '94.43%'
-          },
-          {
-            infotext: '当年修理经费：',
-            infovalue: '200'
-          }
-        ],
-        ZdPieData: [
-          { value: 5, name: '航空母舰' },
-          { value: 100, name: '护卫舰' },
-          { value: 150, name: '驱逐舰' },
-          { value: 41, name: '两栖舰' },
-          { value: 32, name: '登录舰' }
-        ],
-        FzPieData: [
-          { value: 35, name: '补给舰' },
-          { value: 44, name: '运输舰' },
-          { value: 23, name: '维修船' }
-        ]
-      }
-    },
-    components: {
-      mixChart,
-      InfoTable,
-      pieChart
-    },
-    mounted() {
-
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event)
-      }
+export default {
+  name: 'index',
+  data() {
+    return {
+      activeName: 'first',
+      tableData: [
+        {
+          infotext: '现役舰船数：',
+          infovalue: '449'
+        },
+        {
+          infotext: '总吨位：',
+          infovalue: '2496'
+        },
+        {
+          infotext: '在修舰船数：',
+          infovalue: '25'
+        },
+        {
+          infotext: '在航舰船数：',
+          infovalue: '424'
+        },
+        {
+          infotext: '在航率：',
+          infovalue: '94.43%'
+        },
+        {
+          infotext: '当年修理经费：',
+          infovalue: '200'
+        }
+      ],
+      ZdPieData: [
+        { value: 5, name: '航空母舰' },
+        { value: 100, name: '护卫舰' },
+        { value: 150, name: '驱逐舰' },
+        { value: 41, name: '两栖舰' },
+        { value: 32, name: '登录舰' }
+      ],
+      FzPieData: [
+        { value: 35, name: '补给舰' },
+        { value: 44, name: '运输舰' },
+        { value: 23, name: '维修船' }
+      ]
+    }
+  },
+  components: {
+    mixChart,
+    InfoTable,
+    pieChart
+  },
+  mounted() {},
+  methods: {
+    handleClick(tab, event) {
+      console.log(tab, event)
     }
   }
+}
 </script>
 
 <style scoped>
-  .overview-components-container {
-    background-color: #f0f2f5;
-    padding: 20px;
-    min-height: calc(100vh - 84px);
-  }
+.overview-components-container {
+  background-color: #f0f2f5;
+  padding: 20px;
+  min-height: calc(100vh - 84px);
+}
 
-  .card-component-sm {
-    min-height: 100px;
-    height: 264px;
-  }
-  .chart-container{
-    position: relative;
-    padding: 20px;
-    width: 100%;
-    height:400px;
-  }
-  .box-card-style {
-    margin-top: 20px;
-  }
-  .box-card{
-    box-shadow: 0  4px 0 rgba(204,204,204,0.6)
-  }
+.card-component-sm {
+  min-height: 100px;
+  height: 264px;
+}
+.chart-container {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  height: 400px;
+}
+.box-card-style {
+  margin-top: 20px;
+}
+.box-card {
+  box-shadow: 0 4px 0 rgba(204, 204, 204, 0.6);
+}
 </style>
