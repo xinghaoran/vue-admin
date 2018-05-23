@@ -6,7 +6,7 @@
 
 ``` bash
 
-#安装cnpm（淘宝镜像）
+#安装cnpm（淘宝镜像 据说会出异常）
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 # Clone project
