@@ -1,6 +1,6 @@
 <template>
   <div class="overview-components-container">
-    <el-row :gutter="20" style="margin-bottom: 10px">
+    <el-row :gutter="10" style="margin-bottom: 10px">
 
       <el-col :sm="24" :md="24" :lg="8" class="box-card-style">
         <el-card class="box-card">
@@ -37,7 +37,7 @@
 
     </el-row>
 
-    <el-row>
+    <el-row style="margin-bottom: 10px">
       <el-card class="box-card">
         <div class="">
           <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -51,6 +51,12 @@
             </el-tab-pane>
           </el-tabs>
         </div>
+      </el-card>
+    </el-row>
+
+    <el-row>
+      <el-card class="box-card">
+        
       </el-card>
     </el-row>
 
@@ -139,9 +145,6 @@ export default {
   height: 400px;
 }
 .box-card-style {
-  margin-top: 20px;
-}
-.box-card {
-  box-shadow: 0 4px 0 rgba(204, 204, 204, 0.6);
+  margin-top: 0px;
 }
 </style>

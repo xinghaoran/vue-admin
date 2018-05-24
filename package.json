@@ -14,7 +14,8 @@
     "build:sit": "cross-env NODE_ENV=production env_config=sit node build/build.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "report": "npm run build:prod --report"
   },
   "dependencies": {
     "axios": "0.18.0",
