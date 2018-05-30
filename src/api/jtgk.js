@@ -27,3 +27,17 @@ export function getOverViewInfoTable() {
     method: 'post'
   })
 }
+
+export function getFzjtPieData() {
+  return request({
+    url: 'jtgk/getfzjtpiedata',
+    method: 'post'
+  })
+}
+
+export function getZdjtPieData() {
+  return request({
+    url: 'jtgk/getzdjtpiedata',
+    method: 'post'
+  })
+}

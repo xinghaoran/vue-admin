@@ -131,7 +131,12 @@
 import InfoTable from '@/components/InfoTable'
 import pieChart from '@/components/Charts/pieChart'
 import mixChart from '@/components/Charts/mixChart'
-import { fetchList, getOverViewInfoTable } from '@/api/jtgk'
+import {
+  fetchList,
+  getOverViewInfoTable,
+  getFzjtPieData,
+  getZdjtPieData
+} from '@/api/jtgk'
 import { parseTime } from '@/utils'
 
 export default {
@@ -144,18 +149,8 @@ export default {
         zdjtzs: null,
         fzjtzs: null
       },
-      ZdPieData: [
-        { value: 5, name: '航空母舰' },
-        { value: 100, name: '护卫舰' },
-        { value: 150, name: '驱逐舰' },
-        { value: 41, name: '两栖舰' },
-        { value: 32, name: '登录舰' }
-      ],
-      FzPieData: [
-        { value: 35, name: '补给舰' },
-        { value: 44, name: '运输舰' },
-        { value: 23, name: '维修船' }
-      ],
+      ZdPieData: [],
+      FzPieData: [],
       tableKey: 0,
       list: null,
       total: null,
@@ -183,6 +178,8 @@ export default {
   created() {
     this.getList()
     this.getOverViewInfo()
+    this.getZdPieData()
+    this.getFzPieData()
   },
   components: {
     mixChart,
@@ -216,6 +213,16 @@ export default {
         this.overViewInfoData.infoTable = response.data.infotable
         this.overViewInfoData.zdjtzs = response.data.zdjtzs
         this.overViewInfoData.fzjtzs = response.data.fzjtzs
+      })
+    },
+    getZdPieData() {
+      getZdjtPieData().then(response => {
+        this.ZdPieData = response.data.ZdPieData
+      })
+    },
+    getFzPieData() {
+      getFzjtPieData().then(response => {
+        this.FzPieData = response.data.FzPieData
       })
     },
     formatJson(filterVal, jsonData) {

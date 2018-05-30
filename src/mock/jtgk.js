@@ -3,14 +3,51 @@ import Mock from 'mockjs'
 //   param2Obj
 // } from '@/utils'
 
+Mock.Random.extend({
+  yjpts: ['战斗舰艇', '辅助船'],
+  yjpt: function(date) {
+    return this.pick(this.yjpts)
+  }
+})
+
+Mock.Random.extend({
+  ejpts: ['航空母舰', '战列舰', '巡洋舰', '战列巡洋舰', '驱逐舰', '护卫舰', '鱼雷艇', '导弹艇', '猎潜艇', '潜艇救援舰', '布雷舰', '反水雷舰艇', '两栖登陆舰', '登陆舰'],
+  ejpt: function(date) {
+    return this.pick(this.ejpts)
+  }
+})
+
+Mock.Random.extend({
+  zdpiedata: [
+    { value: 5, name: '航空母舰' },
+    { value: 100, name: '护卫舰' },
+    { value: 150, name: '驱逐舰' },
+    { value: 41, name: '两栖舰' },
+    { value: 32, name: '登录舰' }
+  ],
+  zdjtpiedate: function(date) {
+    return this.zdpiedata
+  }
+})
+
+Mock.Random.extend({
+  fzpiedata: [
+    { value: 35, name: '补给舰' },
+    { value: 44, name: '运输舰' },
+    { value: 23, name: '维修船' }
+  ],
+  fzjtpiedate: function(date) {
+    return this.fzpiedata
+  }
+})
+
 const List = []
 const count = 15
-
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
-    yjpt: Mock.Random.cword(3, 4),
-    ejpt: Mock.Random.cword(3, 4),
-    jx: Mock.Random.cword(5, 12),
+    yjpt: Mock.Random.yjpt(),
+    ejpt: Mock.Random.ejpt(),
+    jx: Mock.Random.cword(6, 12),
     sszj: i, // Mock.Random.integer(10, 60),
     zhl: Mock.Random.float(0, 100),
     zxs: Mock.Random.integer(10, 60),
@@ -253,9 +290,11 @@ export default {
     // 筛选项
     const filterList = () => {
       const list = []
+      const jxlist = []
       for (let i = 0; i < List.length; i++) {
         const element = List[i]
-        if (list.indexOf(element.jx) === -1) {
+        if (jxlist.indexOf(element.jx) === -1) {
+          jxlist.push(element.jx)
           list.push({
             text: element.jx,
             value: element.jx
@@ -278,6 +317,16 @@ export default {
       infotable: InfoTable,
       zdjtzs: Mock.Random.integer(80, 200),
       fzjtzs: Mock.Random.integer(100, 300)
+    }
+  },
+  getZdjtPieData() {
+    return {
+      ZdPieData: Mock.Random.zdjtpiedate()
+    }
+  },
+  getFzjtPieData() {
+    return {
+      FzPieData: Mock.Random.fzjtpiedate()
     }
   }
 }
