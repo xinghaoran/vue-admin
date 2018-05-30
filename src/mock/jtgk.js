@@ -20,10 +20,14 @@ Mock.Random.extend({
 Mock.Random.extend({
   zdpiedata: [
     { value: 5, name: '航空母舰' },
-    { value: 100, name: '护卫舰' },
-    { value: 150, name: '驱逐舰' },
-    { value: 41, name: '两栖舰' },
-    { value: 32, name: '登录舰' }
+    { value: 100, name: '战列舰' },
+    { value: 150, name: '巡洋舰' },
+    { value: 41, name: '战列巡洋舰' },
+    { value: 41, name: '驱逐舰' },
+    { value: 41, name: '护卫舰' },
+    { value: 41, name: '导弹艇' },
+    { value: 41, name: '猎潜艇' },
+    { value: 32, name: '鱼雷艇' }
   ],
   zdjtpiedate: function(date) {
     return this.zdpiedata
@@ -32,8 +36,11 @@ Mock.Random.extend({
 
 Mock.Random.extend({
   fzpiedata: [
-    { value: 35, name: '补给舰' },
-    { value: 44, name: '运输舰' },
+    { value: 35, name: '潜艇救援舰' },
+    { value: 35, name: '布雷舰' },
+    { value: 35, name: '反水雷舰艇' },
+    { value: 35, name: '两栖登陆舰' },
+    { value: 44, name: '登陆舰' },
     { value: 23, name: '维修船' }
   ],
   fzjtpiedate: function(date) {
@@ -42,7 +49,7 @@ Mock.Random.extend({
 })
 
 const List = []
-const count = 15
+const count = 20
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
     yjpt: Mock.Random.yjpt(),
@@ -59,7 +66,7 @@ for (let i = 0; i < count; i++) {
     dnjf: Mock.Random.float(5000, 20000)
   }))
 }
-
+console.log(List)
 const InfoTable = [{
   infotext: '现役舰船数：',
   infovalue: Mock.Random.integer(100, 260)
@@ -89,7 +96,7 @@ const InfoTable = [{
 export default {
   getList: (config) => {
     const data = JSON.parse(config.body)
-
+    // console.log(config.body)
     const yjpt = data.query.yjpt
     const ejpt = data.query.ejpt
     const jx = data.query.jx
@@ -106,7 +113,8 @@ export default {
     const limit = data.query.limit
     const sort_field = data.query.sort_field
     const sort_type = data.query.sort_type
-    const selectValue = data.selectValue
+    const selectValue = data.query.selValList
+    const paramEjpt = data.query.paramEjpt
     // 筛选
     let mockList = []
     if (!selectValue || selectValue.length === 0) {
@@ -135,6 +143,7 @@ export default {
       if (hxzxs && item.hxzxs.indexOf(hxzxs) < 0) return false
       if (wjzxs && item.wjzxs.indexOf(wjzxs) < 0) return false
       if (dnjf && item.dnjf.indexOf(dnjf) < 0) return false
+      if (paramEjpt && item.ejpt !== paramEjpt) return false
       return true
     })
 
@@ -293,6 +302,9 @@ export default {
       const jxlist = []
       for (let i = 0; i < List.length; i++) {
         const element = List[i]
+        if (element.ejpt !== paramEjpt) {
+          continue
+        }
         if (jxlist.indexOf(element.jx) === -1) {
           jxlist.push(element.jx)
           list.push({

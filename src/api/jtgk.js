@@ -9,11 +9,11 @@ import request from '@/utils/request'
 //   })
 // }
 
-export function fetchList(query, selectValue) {
+export function fetchList(query) {
   const data = {
-    query,
-    selectValue
+    query
   }
+  // console.log(data)
   return request({
     url: '/jtgk/list',
     method: 'post',

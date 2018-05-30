@@ -143,11 +143,11 @@ export default {
       sszj: '艘数总计',
       zhl: '在航率',
       zxs: '在修数',
-      zxzxs: '中修在修数',
-      xxzxs: '小修在修数',
-      wxzxs: '坞修在修数',
-      hxzxs: '航修在修数',
-      wjzxs: '坞检在修数',
+      zxzxs: '中修在修',
+      xxzxs: '小修在修',
+      wxzxs: '坞修在修',
+      hxzxs: '航修在修',
+      wjzxs: '坞检在修',
       dnjf: '当年经费'
     },
     card: {

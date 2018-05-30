@@ -19,7 +19,7 @@
             <span>{{$t('jtgk.card.zdjtzs')}}:{{overViewInfoData.zdjtzs}}{{$t('jtgk.card.ships')}}</span>
           </div>
           <div class="card-component-sm">
-            <pieChart :chart-data="ZdPieData" :chart-name="'战斗舰艇分布'"></pieChart>
+            <pieChart @selectPieJx="selectPieZdJx" :chart-data="ZdPieData" :chart-name="'战斗舰艇分布'"></pieChart>
           </div>
         </el-card>
       </el-col>
@@ -30,7 +30,7 @@
             <span>{{$t('jtgk.card.fzjtzs')}}:{{overViewInfoData.fzjtzs}}{{$t('jtgk.card.ships')}}</span>
           </div>
           <div class="card-component-sm">
-            <pieChart :chart-data="FzPieData" :chart-name="'辅助舰艇分布'"></pieChart>
+            <pieChart @selectPieJx="selectPieFzJx" :chart-data="FzPieData" :chart-name="'辅助舰艇分布'"></pieChart>
           </div>
         </el-card>
       </el-col>
@@ -55,7 +55,7 @@
     <el-row>
       <el-card class="box-card">
         <el-table :key='tableKey' border :data="list" @sort-change="handleSortChange" @filter-change="filterChangeHandler" v-loading="listLoading" element-loading-text="给我一点时间" fit highlight-current-row style="width: 100%">
-          <el-table-column width="105px" align="center" :label="$t('jtgk.table.yjpt')">
+          <el-table-column width="100px" align="center" :label="$t('jtgk.table.yjpt')">
             <template slot-scope="scope">
               <span>{{scope.row.yjpt}}</span>
             </template>
@@ -85,27 +85,27 @@
               <span>{{scope.row.zxs}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="120px" align="center" :label="$t('jtgk.table.zxzxs')" sortable="custom" prop="zxzxs">
+          <el-table-column width="110px" align="center" :label="$t('jtgk.table.zxzxs')" sortable="custom" prop="zxzxs">
             <template slot-scope="scope">
               <span>{{scope.row.zxzxs}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="120px" align="center" :label="$t('jtgk.table.xxzxs')" sortable="custom" prop="xxzxs">
+          <el-table-column width="110px" align="center" :label="$t('jtgk.table.xxzxs')" sortable="custom" prop="xxzxs">
             <template slot-scope="scope">
               <span>{{scope.row.xxzxs}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="120px" align="center" :label="$t('jtgk.table.wxzxs')" sortable="custom" prop="wxzxs">
+          <el-table-column width="110px" align="center" :label="$t('jtgk.table.wxzxs')" sortable="custom" prop="wxzxs">
             <template slot-scope="scope">
               <span>{{scope.row.wxzxs}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="120px" align="center" :label="$t('jtgk.table.hxzxs')" sortable="custom" prop="hxzxs">
+          <el-table-column width="110px" align="center" :label="$t('jtgk.table.hxzxs')" sortable="custom" prop="hxzxs">
             <template slot-scope="scope">
               <span>{{scope.row.hxzxs}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="120px" align="center" :label="$t('jtgk.table.wjzxs')" sortable="custom" prop="wjzxs">
+          <el-table-column width="110px" align="center" :label="$t('jtgk.table.wjzxs')" sortable="custom" prop="wjzxs">
             <template slot-scope="scope">
               <span>{{scope.row.wjzxs}}</span>
             </template>
@@ -156,7 +156,6 @@ export default {
       total: null,
       filterList: null,
       listLoading: true,
-      selValList: null,
       listQuery: {
         page: 1,
         limit: 5,
@@ -171,15 +170,19 @@ export default {
         wjzxs: null,
         dnjf: null,
         sort_field: 'jx',
-        sort_type: 'ascending'
+        sort_type: 'ascending',
+        paramEjpt: null,
+        selValList: []
       }
     }
   },
   created() {
-    this.getList()
     this.getOverViewInfo()
-    this.getZdPieData()
+    this.getZdPieData()// 列表依赖战斗舰艇请求来的第一条数据
     this.getFzPieData()
+    // console.log('satartGetList')
+    // setTimeout(this.getList(), 3000)
+    // console.log('endGetList')
   },
   components: {
     mixChart,
@@ -201,7 +204,7 @@ export default {
     },
     getList() {
       this.listLoading = true
-      fetchList(this.listQuery, this.selValList).then(response => {
+      fetchList(this.listQuery).then(response => {
         this.list = response.data.items
         this.total = response.data.total
         this.filterList = response.data.filterList
@@ -218,6 +221,10 @@ export default {
     getZdPieData() {
       getZdjtPieData().then(response => {
         this.ZdPieData = response.data.ZdPieData
+        if (response.data.ZdPieData.length !== 0) {
+          this.listQuery.paramEjpt = response.data.ZdPieData[0].name
+          this.getList()
+        }
       })
     },
     getFzPieData() {
@@ -256,8 +263,18 @@ export default {
     },
     filterChangeHandler(filters) {
       for (var key in filters) {
-        this.selValList = filters[key]
+        this.listQuery.selValList = filters[key]
       }
+      this.getList()
+    },
+    selectPieZdJx(params) {
+      console.log(params)
+      this.listQuery.paramEjpt = params
+      this.getList()
+    },
+    selectPieFzJx(params) {
+      console.log(params)
+      this.listQuery.paramEjpt = params
       this.getList()
     }
   }
