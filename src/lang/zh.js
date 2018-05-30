@@ -134,5 +134,27 @@ export default {
     close: '关闭',
     closeOthers: '关闭其它',
     closeAll: '关闭所有'
+  },
+  jtgk: {
+    table: {
+      yjpt: '一级平台',
+      ejpt: '二级平台',
+      jx: '舰型',
+      sszj: '艘数总计',
+      zhl: '在航率',
+      zxs: '在修数',
+      zxzxs: '中修在修数',
+      xxzxs: '小修在修数',
+      wxzxs: '坞修在修数',
+      hxzxs: '航修在修数',
+      wjzxs: '坞检在修数',
+      dnjf: '当年经费'
+    },
+    card: {
+      jtxxgk: '舰艇信息概况',
+      zdjtzs: '战斗舰艇总数',
+      fzjtzs: '辅助舰艇总数',
+      ships: ' 艘'
+    }
   }
 }

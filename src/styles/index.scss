@@ -60,4 +60,14 @@ a:hover {
 
 .box-card {
   box-shadow: 0 4px 0 rgba(204, 204, 204, 0.6);
+  margin-bottom: 15px
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
 }

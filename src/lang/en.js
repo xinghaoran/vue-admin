@@ -134,5 +134,27 @@ export default {
     close: 'Close',
     closeOthers: 'Close Others',
     closeAll: 'Close All'
+  },
+  jtgk: {
+    table: {
+      yjpt: 'YJPT',
+      ejpt: 'EJPT',
+      jx: 'JX',
+      sszj: 'SSZJ',
+      zhl: 'ZHL',
+      zxs: 'ZXS',
+      zxzxs: 'ZXZXS',
+      xxzxs: 'XXZXS',
+      wxzxs: 'WXZXS',
+      hxzxs: 'HXZXS',
+      wjzxs: 'WJZXS',
+      dnjf: 'DNJF'
+    },
+    card: {
+      jtxxgk: 'Warship Overview',
+      zdjtzs: 'Combat Ship Count',
+      fzjtzs: 'Auxiliary Ship Count',
+      ships: ' Ships'
+    }
   }
 }

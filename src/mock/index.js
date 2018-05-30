@@ -3,6 +3,7 @@ import loginAPI from './login'
 import articleAPI from './article'
 import remoteSearchAPI from './remoteSearch'
 import transactionAPI from './transaction'
+import jtgkAPI from './jtgk'
 
 // Mock.setup({
 //   timeout: '350-600'
@@ -25,5 +26,9 @@ Mock.mock(/\/search\/user/, 'get', remoteSearchAPI.searchUser)
 
 // 账单相关
 Mock.mock(/\/transaction\/list/, 'get', transactionAPI.getList)
+
+// 舰艇概况
+Mock.mock(/\/jtgk\/list/, jtgkAPI.getList)
+Mock.mock(/\/jtgk\/overviewinfogtable/, jtgkAPI.getOverViewInfoTable)
 
 export default Mock
