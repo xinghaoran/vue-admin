@@ -32,5 +32,7 @@ Mock.mock(/\/jtgk\/list/, jtgkAPI.getList)
 Mock.mock(/\/jtgk\/overviewinfogtable/, jtgkAPI.getOverViewInfoTable)
 Mock.mock(/\/jtgk\/getfzjtpiedata/, jtgkAPI.getFzjtPieData)
 Mock.mock(/\/jtgk\/getzdjtpiedata/, jtgkAPI.getZdjtPieData)
+Mock.mock(/\/jtgk\/getCountBarData/, jtgkAPI.getCountBarData_Mock)
+Mock.mock(/\/jtgk\/getFundBarData/, jtgkAPI.getFundBarData_Mock)
 
 export default Mock

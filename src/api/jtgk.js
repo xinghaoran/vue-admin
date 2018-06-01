@@ -41,3 +41,25 @@ export function getZdjtPieData() {
     method: 'post'
   })
 }
+
+export function getCountBarData_Api(params) {
+  const data = {
+    params
+  }
+  return request({
+    url: '/jtgk/getCountBarData',
+    method: 'post',
+    data
+  })
+}
+
+export function getFundBarData_Api(params) {
+  const data = {
+    params
+  }
+  return request({
+    url: '/jtgk/getFundBarData',
+    method: 'post',
+    data
+  })
+}

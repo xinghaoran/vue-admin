@@ -18,8 +18,8 @@
           <div slot="header" class="clearfix">
             <span>{{$t('jtgk.card.zdjtzs')}}:{{overViewInfoData.zdjtzs}}{{$t('jtgk.card.ships')}}</span>
           </div>
-          <div class="card-component-sm">
-            <pieChart @selectPieJx="selectPieZdJx" :chart-data="ZdPieData" :chart-name="'战斗舰艇分布'"></pieChart>
+          <div class="card-component-sm" @click="ClickZdRang">
+            <pieChart @selectPieJx="selectPieZdJx" :chart-data="ZdPieData" :chart-name="'战斗舰艇总数'"></pieChart>
           </div>
         </el-card>
       </el-col>
@@ -29,8 +29,8 @@
           <div slot="header" class="clearfix">
             <span>{{$t('jtgk.card.fzjtzs')}}:{{overViewInfoData.fzjtzs}}{{$t('jtgk.card.ships')}}</span>
           </div>
-          <div class="card-component-sm">
-            <pieChart @selectPieJx="selectPieFzJx" :chart-data="FzPieData" :chart-name="'辅助舰艇分布'"></pieChart>
+          <div class="card-component-sm" @click="ClickFzRang">
+            <pieChart @selectPieJx="selectPieFzJx" :chart-data="FzPieData" :chart-name="'辅助舰艇总数'"></pieChart>
           </div>
         </el-card>
       </el-col>
@@ -39,14 +39,16 @@
 
     <el-row>
       <el-card class="box-card">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName" @tab-click="handleClick" id="el-tabs-container">
           <el-tab-pane label="当前舰型在修在航统计柱状图" name="first">
             <div class='chart-container'>
-              <mix-chart height='100%' width='100%'></mix-chart>
+              <barChart @selectBarJx="selectBarJx" :chart-data="CountBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
             </div>
           </el-tab-pane>
           <el-tab-pane label="当前舰型维修经费统计柱状图" name="second">
-            <mix-chart height='100%' width='100%'></mix-chart>
+            <div class='chart-container'>
+              <barChart @selectBarJx="selectBarJx" :chart-data="FundBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
+            </div>
           </el-tab-pane>
         </el-tabs>
       </el-card>
@@ -130,12 +132,14 @@
 <script>
 import InfoTable from '@/components/InfoTable'
 import pieChart from '@/components/Charts/pieChart'
-import mixChart from '@/components/Charts/mixChart'
+import barChart from '@/components/Charts/barChart'
 import {
   fetchList,
   getOverViewInfoTable,
   getFzjtPieData,
-  getZdjtPieData
+  getZdjtPieData,
+  getCountBarData_Api,
+  getFundBarData_Api
 } from '@/api/jtgk'
 import { parseTime } from '@/utils'
 
@@ -151,6 +155,67 @@ export default {
       },
       ZdPieData: [],
       FzPieData: [],
+      CountBarData: {},
+      FundBarData: {},
+      FundBarData1: {
+        xAxis: [
+          '驱逐舰',
+          '护卫舰',
+          '巡洋舰',
+          '战列舰',
+          '补给舰',
+          '登陆舰',
+          '布雷艇'
+        ],
+        Series: [
+          {
+            seriesName: '中修',
+            data: [1204, 1332, 1401, 1634, 907, 2300, 2120]
+          },
+          {
+            seriesName: '小修',
+            data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
+          },
+          {
+            seriesName: '坞修',
+            data: [1204, 1332, 1401, 1634, 907, 2300, 2120]
+          },
+          {
+            seriesName: '航修',
+            data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
+          },
+          {
+            seriesName: '坞检',
+            data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
+          }
+        ]
+      },
+      FundBarData2: {
+        SeriesName: ['在修', '在航'],
+        xAxis: ['补给舰', '医疗舰', '维修船', '两栖登录舰'],
+        Series: [
+          {
+            seriesName: '中修',
+            data: [1334, 940, 2350, 2160]
+          },
+          {
+            seriesName: '小修',
+            data: [2734, 2908, 3930, 3410]
+          },
+          {
+            seriesName: '坞修',
+            data: [1334, 940, 2350, 2160]
+          },
+          {
+            seriesName: '航修',
+            data: [2734, 2908, 3930, 3410]
+          },
+          {
+            seriesName: '坞检',
+            data: [2734, 2908, 3930, 3410]
+          }
+        ]
+      },
       tableKey: 0,
       list: null,
       total: null,
@@ -178,31 +243,36 @@ export default {
   },
   created() {
     this.getOverViewInfo()
-    this.getZdPieData()// 列表依赖战斗舰艇请求来的第一条数据
+    this.getZdPieData() // 列表依赖战斗舰艇请求来的第一条数据
     this.getFzPieData()
-    // console.log('satartGetList')
+    this.getCountBarData('战斗舰艇')
+    this.getFundBarData('战斗舰艇')
     // setTimeout(this.getList(), 3000)
     // console.log('endGetList')
   },
   components: {
-    mixChart,
     InfoTable,
-    pieChart
+    pieChart,
+    barChart
   },
   mounted() {},
   filters: {
     keepDec(num, decCount) {
+      // 保留小数位筛选器
       return num.toFixed(decCount)
     },
     changePercentage(num) {
+      // 保留两位小数并加%号筛选器
       return num.toFixed(2) + '%'
     }
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event)
+      // 切换tabs回调函数
+      // console.log(tab, event)
     },
     getList() {
+      // 请求后台列表数据引擎函数
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
         this.list = response.data.items
@@ -212,6 +282,7 @@ export default {
       })
     },
     getOverViewInfo() {
+      // 获取概况信息
       getOverViewInfoTable().then(response => {
         this.overViewInfoData.infoTable = response.data.infotable
         this.overViewInfoData.zdjtzs = response.data.zdjtzs
@@ -220,6 +291,7 @@ export default {
     },
     getZdPieData() {
       getZdjtPieData().then(response => {
+        // 获取战斗舰船饼图数据 请求成功后以第一条舰型为参数请求列表数据
         this.ZdPieData = response.data.ZdPieData
         if (response.data.ZdPieData.length !== 0) {
           this.listQuery.paramEjpt = response.data.ZdPieData[0].name
@@ -228,11 +300,25 @@ export default {
       })
     },
     getFzPieData() {
+      // 获取辅助舰船饼图数据
       getFzjtPieData().then(response => {
         this.FzPieData = response.data.FzPieData
       })
     },
+    getCountBarData(params) {
+      // 获取柱状图艘次数
+      getCountBarData_Api(params).then(response => {
+        this.CountBarData = response.data
+      })
+    },
+    getFundBarData(params) {
+      // 获取柱状图经费数
+      getFundBarData_Api(params).then(response => {
+        this.FundBarData = response.data
+      })
+    },
     formatJson(filterVal, jsonData) {
+      // 格式化时间格式 暂时未用到
       return jsonData.map(v =>
         filterVal.map(j => {
           if (j === 'timestamp') {
@@ -244,38 +330,58 @@ export default {
       )
     },
     handleSizeChange(val) {
+      // 当前页显示数据量改变时 调用该函数
       this.listQuery.limit = val
       this.getList()
     },
     handleCurrentChange(val) {
+      // 当前页码改变时 调用该函数
       this.listQuery.page = val
       this.getList()
     },
     handleSortChange(column, prop, order) {
+      // 排序条件改变时 调用该函数
       this.listQuery.sort_type = column.order
       this.listQuery.sort_field = column.prop
       this.listQuery.page = 1
       this.getList()
     },
     filterHandler(value, row, column) {
+      // 筛选必须函数
       const property = column['property']
       return row[property] === value
     },
     filterChangeHandler(filters) {
+      // 筛选条件改变时 调用该函数请求新的筛选数据
       for (var key in filters) {
         this.listQuery.selValList = filters[key]
       }
       this.getList()
     },
     selectPieZdJx(params) {
-      console.log(params)
+      // 点击战斗饼图舰型 更新表格数据
       this.listQuery.paramEjpt = params
       this.getList()
     },
     selectPieFzJx(params) {
-      console.log(params)
+      // 点击辅助饼图舰型 更新表格数据
       this.listQuery.paramEjpt = params
       this.getList()
+    },
+    selectBarJx(params) {
+      // 点击柱状图舰型 更新表格数据
+      this.listQuery.paramEjpt = params
+      this.getList()
+    },
+    ClickZdRang() {
+      // 点击战斗饼图区域 更新柱状图
+      this.getCountBarData('战斗舰艇')
+      this.getFundBarData('战斗舰艇')
+    },
+    ClickFzRang() {
+      // 点击辅助饼图区域 更新柱状图
+      this.getCountBarData('辅助船')
+      this.getFundBarData('辅助船')
     }
   }
 }

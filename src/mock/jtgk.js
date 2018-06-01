@@ -18,16 +18,42 @@ Mock.Random.extend({
 })
 
 Mock.Random.extend({
-  zdpiedata: [
-    { value: 5, name: '航空母舰' },
-    { value: 100, name: '战列舰' },
-    { value: 150, name: '巡洋舰' },
-    { value: 41, name: '战列巡洋舰' },
-    { value: 41, name: '驱逐舰' },
-    { value: 41, name: '护卫舰' },
-    { value: 41, name: '导弹艇' },
-    { value: 41, name: '猎潜艇' },
-    { value: 32, name: '鱼雷艇' }
+  zdpiedata: [{
+    value: 5,
+    name: '航空母舰'
+  },
+  {
+    value: 100,
+    name: '战列舰'
+  },
+  {
+    value: 150,
+    name: '巡洋舰'
+  },
+  {
+    value: 41,
+    name: '战列巡洋舰'
+  },
+  {
+    value: 41,
+    name: '驱逐舰'
+  },
+  {
+    value: 41,
+    name: '护卫舰'
+  },
+  {
+    value: 41,
+    name: '导弹艇'
+  },
+  {
+    value: 41,
+    name: '猎潜艇'
+  },
+  {
+    value: 32,
+    name: '鱼雷艇'
+  }
   ],
   zdjtpiedate: function(date) {
     return this.zdpiedata
@@ -35,13 +61,30 @@ Mock.Random.extend({
 })
 
 Mock.Random.extend({
-  fzpiedata: [
-    { value: 35, name: '潜艇救援舰' },
-    { value: 35, name: '布雷舰' },
-    { value: 35, name: '反水雷舰艇' },
-    { value: 35, name: '两栖登陆舰' },
-    { value: 44, name: '登陆舰' },
-    { value: 23, name: '维修船' }
+  fzpiedata: [{
+    value: 35,
+    name: '潜艇救援舰'
+  },
+  {
+    value: 35,
+    name: '布雷舰'
+  },
+  {
+    value: 35,
+    name: '反水雷舰艇'
+  },
+  {
+    value: 35,
+    name: '两栖登陆舰'
+  },
+  {
+    value: 44,
+    name: '登陆舰'
+  },
+  {
+    value: 23,
+    name: '维修船'
+  }
   ],
   fzjtpiedate: function(date) {
     return this.fzpiedata
@@ -49,7 +92,7 @@ Mock.Random.extend({
 })
 
 const List = []
-const count = 20
+const count = 200
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
     yjpt: Mock.Random.yjpt(),
@@ -66,7 +109,6 @@ for (let i = 0; i < count; i++) {
     dnjf: Mock.Random.float(5000, 20000)
   }))
 }
-console.log(List)
 const InfoTable = [{
   infotext: '现役舰船数：',
   infovalue: Mock.Random.integer(100, 260)
@@ -90,6 +132,82 @@ const InfoTable = [{
 {
   infotext: '当年修理经费：',
   infovalue: Mock.Random.float(5000, 20000, 2, 2)
+}
+]
+const CountBarDataList = [{
+  xAxis: ['驱逐舰', '护卫舰', '巡洋舰', '战列舰', '补给舰', '登陆舰', '布雷艇'],
+  Series: [{
+    seriesName: '在修',
+    data: [120, 132, 101, 134, 90, 230, 210]
+  },
+  {
+    seriesName: '在航',
+    data: [80, 132, 234, 290, 330, 310, 120]
+  }
+  ]
+},
+{
+  SeriesName: ['在修', '在航'],
+  xAxis: ['补给舰', '医疗舰', '维修船', '两栖登录舰'],
+  Series: [{
+    seriesName: '在修',
+    data: [134, 90, 230, 210]
+  },
+  {
+    seriesName: '在航',
+    data: [234, 290, 330, 310]
+  }
+  ]
+}
+]
+const FundBarDataList = [{
+  xAxis: ['驱逐舰', '护卫舰', '巡洋舰', '战列舰', '补给舰', '登陆舰', '布雷艇'],
+  Series: [{
+    seriesName: '中修',
+    data: [1204, 1332, 1401, 1634, 907, 2300, 2120]
+  },
+  {
+    seriesName: '小修',
+    data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
+  },
+  {
+    seriesName: '坞修',
+    data: [1204, 1332, 1401, 1634, 907, 2300, 2120]
+  },
+  {
+    seriesName: '航修',
+    data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
+  },
+  {
+    seriesName: '坞检',
+    data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
+  }
+  ]
+},
+{
+  SeriesName: ['在修', '在航'],
+  xAxis: ['补给舰', '医疗舰', '维修船', '两栖登录舰'],
+  Series: [{
+    seriesName: '中修',
+    data: [1334, 940, 2350, 2160]
+  },
+  {
+    seriesName: '小修',
+    data: [2734, 2908, 3930, 3410]
+  },
+  {
+    seriesName: '坞修',
+    data: [1334, 940, 2350, 2160]
+  },
+  {
+    seriesName: '航修',
+    data: [2734, 2908, 3930, 3410]
+  },
+  {
+    seriesName: '坞检',
+    data: [2734, 2908, 3930, 3410]
+  }
+  ]
 }
 ]
 
@@ -339,6 +457,22 @@ export default {
   getFzjtPieData() {
     return {
       FzPieData: Mock.Random.fzjtpiedate()
+    }
+  },
+  getCountBarData_Mock(config) {
+    const data = JSON.parse(config.body)
+    if (data.params === '战斗舰艇') {
+      return CountBarDataList[0]
+    } else {
+      return CountBarDataList[1]
+    }
+  },
+  getFundBarData_Mock(config) {
+    const data = JSON.parse(config.body)
+    if (data.params === '战斗舰艇') {
+      return FundBarDataList[0]
+    } else {
+      return FundBarDataList[1]
     }
   }
 }
