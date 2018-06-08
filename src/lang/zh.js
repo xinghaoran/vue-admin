@@ -50,7 +50,9 @@ export default {
     theme: '换肤',
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
-    overview: '舰艇概况'
+    shipinfo: '舰艇信息',
+    overview: '舰艇概况',
+    repair: '舰艇维修'
   },
   navbar: {
     logOut: '退出登录',

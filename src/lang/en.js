@@ -50,7 +50,9 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
     tree: 'Tree',
-    overview: 'Overview'
+    shipinfo: 'ShipInfo',
+    overview: 'Overview',
+    repair: 'Repair'
   },
   navbar: {
     logOut: 'Log Out',

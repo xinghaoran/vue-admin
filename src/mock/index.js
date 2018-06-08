@@ -4,6 +4,7 @@ import articleAPI from './article'
 import remoteSearchAPI from './remoteSearch'
 import transactionAPI from './transaction'
 import jtgkAPI from './jtgk'
+import jtwxApi from './jtwx'
 
 // Mock.setup({
 //   timeout: '350-600'
@@ -34,5 +35,10 @@ Mock.mock(/\/jtgk\/getfzjtpiedata/, jtgkAPI.getFzjtPieData)
 Mock.mock(/\/jtgk\/getzdjtpiedata/, jtgkAPI.getZdjtPieData)
 Mock.mock(/\/jtgk\/getCountBarData/, jtgkAPI.getCountBarData_Mock)
 Mock.mock(/\/jtgk\/getFundBarData/, jtgkAPI.getFundBarData_Mock)
+
+// 舰艇维修
+Mock.mock(/\/jtwx\/zdtree/, jtwxApi.getZdTreeData)
+Mock.mock(/\/jtwx\/fztree/, jtwxApi.getFzTreeData)
+Mock.mock(/\/jtwx\/dwtree/, jtwxApi.getDwTreeData)
 
 export default Mock

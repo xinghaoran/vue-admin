@@ -55,11 +55,14 @@ a:hover {
 }
 
 .app-container {
+  // padding: 20px;
+  background-color: #f0f2f5;
   padding: 20px;
+  min-height: calc(100vh - 84px);
 }
 
 .box-card {
-  box-shadow: 0 4px 0 rgba(204, 204, 204, 0.6);
+  // box-shadow: 0 4px 0 rgba(204, 204, 204, 0.6);
   margin-bottom: 15px
 }
 

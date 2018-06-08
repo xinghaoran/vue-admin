@@ -1,9 +1,9 @@
 <template>
-  <div class="overview-components-container">
+  <div class="app-container">
     <el-row :gutter="10">
 
       <el-col :sm="24" :md="24" :lg="8">
-        <el-card class="box-card">
+        <el-card class="box-card" shadow="always">
           <div slot="header" class="clearfix">
             <span>{{$t('jtgk.card.jtxxgk')}}</span>
           </div>
@@ -14,7 +14,7 @@
       </el-col>
 
       <el-col :sm="24" :md="12" :lg="8">
-        <el-card class="box-card">
+        <el-card class="box-card" shadow="always">
           <div slot="header" class="clearfix">
             <span>{{$t('jtgk.card.zdjtzs')}}:{{overViewInfoData.zdjtzs}}{{$t('jtgk.card.ships')}}</span>
           </div>
@@ -25,7 +25,7 @@
       </el-col>
 
       <el-col :sm="24" :md="12" :lg="8">
-        <el-card class="box-card">
+        <el-card class="box-card" shadow="always">
           <div slot="header" class="clearfix">
             <span>{{$t('jtgk.card.fzjtzs')}}:{{overViewInfoData.fzjtzs}}{{$t('jtgk.card.ships')}}</span>
           </div>
@@ -38,15 +38,15 @@
     </el-row>
 
     <el-row>
-      <el-card class="box-card">
-        <el-tabs v-model="activeName" @tab-click="handleClick" id="el-tabs-container">
+      <el-card class="box-card" shadow="always">
+        <el-tabs v-model="activeName" @tab-click="handleClick" class="el-tabs-container">
           <el-tab-pane label="当前舰型在修在航统计柱状图" name="first">
-            <div class='chart-container'>
+            <div class='chart-bar-container'>
               <barChart @selectBarJx="selectBarJx" :chart-data="CountBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
             </div>
           </el-tab-pane>
           <el-tab-pane label="当前舰型维修经费统计柱状图" name="second">
-            <div class='chart-container'>
+            <div class='chart-bar-container'>
               <barChart @selectBarJx="selectBarJx" :chart-data="FundBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
             </div>
           </el-tab-pane>
@@ -55,7 +55,7 @@
     </el-row>
 
     <el-row>
-      <el-card class="box-card">
+      <el-card class="box-card" shadow="always">
         <el-table :key='tableKey' border :data="list" @sort-change="handleSortChange" @filter-change="filterChangeHandler" v-loading="listLoading" element-loading-text="给我一点时间" fit highlight-current-row style="width: 100%">
           <el-table-column width="100px" align="center" :label="$t('jtgk.table.yjpt')">
             <template slot-scope="scope">
@@ -157,65 +157,6 @@ export default {
       FzPieData: [],
       CountBarData: {},
       FundBarData: {},
-      FundBarData1: {
-        xAxis: [
-          '驱逐舰',
-          '护卫舰',
-          '巡洋舰',
-          '战列舰',
-          '补给舰',
-          '登陆舰',
-          '布雷艇'
-        ],
-        Series: [
-          {
-            seriesName: '中修',
-            data: [1204, 1332, 1401, 1634, 907, 2300, 2120]
-          },
-          {
-            seriesName: '小修',
-            data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
-          },
-          {
-            seriesName: '坞修',
-            data: [1204, 1332, 1401, 1634, 907, 2300, 2120]
-          },
-          {
-            seriesName: '航修',
-            data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
-          },
-          {
-            seriesName: '坞检',
-            data: [830, 1325, 2634, 2790, 3380, 5310, 3120]
-          }
-        ]
-      },
-      FundBarData2: {
-        SeriesName: ['在修', '在航'],
-        xAxis: ['补给舰', '医疗舰', '维修船', '两栖登录舰'],
-        Series: [
-          {
-            seriesName: '中修',
-            data: [1334, 940, 2350, 2160]
-          },
-          {
-            seriesName: '小修',
-            data: [2734, 2908, 3930, 3410]
-          },
-          {
-            seriesName: '坞修',
-            data: [1334, 940, 2350, 2160]
-          },
-          {
-            seriesName: '航修',
-            data: [2734, 2908, 3930, 3410]
-          },
-          {
-            seriesName: '坞检',
-            data: [2734, 2908, 3930, 3410]
-          }
-        ]
-      },
       tableKey: 0,
       list: null,
       total: null,
@@ -388,17 +329,16 @@ export default {
 </script>
 
 <style scoped>
-.overview-components-container {
+/* .overview-components-container {
   background-color: #f0f2f5;
   padding: 20px;
   min-height: calc(100vh - 84px);
-}
-
+} */
 .card-component-sm {
   min-height: 100px;
   height: 264px;
 }
-.chart-container {
+.chart-bar-container {
   position: relative;
   padding: 20px;
   width: 100%;

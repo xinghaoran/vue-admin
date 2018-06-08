@@ -68,7 +68,7 @@ export default {
     sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
 
     // 监听tabs切换变换
-    const tabsElm = document.getElementById('el-tabs-container')
+    const tabsElm = document.getElementsByClassName('el-tabs-container')[0]
     tabsElm.addEventListener('transitionend', this.__resizeHanlder)
   },
   beforeDestroy() {
@@ -82,7 +82,7 @@ export default {
     const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
     sidebarElm.removeEventListener('transitionend', this.__resizeHanlder)
 
-    const tabsElm = document.getElementById('el-tabs-container')
+    const tabsElm = document.getElementsByClassName('el-tabs-container')[0]
     tabsElm.removeEventListener('transitionend', this.__resizeHanlder)
 
     this.chart.dispose()
