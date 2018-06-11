@@ -61,6 +61,13 @@ a:hover {
   min-height: calc(100vh - 84px);
 }
 
+.chart-bar-container {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  height: 400px;
+}
+
 .box-card {
   // box-shadow: 0 4px 0 rgba(204, 204, 204, 0.6);
   margin-bottom: 15px

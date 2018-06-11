@@ -40,5 +40,12 @@ Mock.mock(/\/jtgk\/getFundBarData/, jtgkAPI.getFundBarData_Mock)
 Mock.mock(/\/jtwx\/zdtree/, jtwxApi.getZdTreeData)
 Mock.mock(/\/jtwx\/fztree/, jtwxApi.getFzTreeData)
 Mock.mock(/\/jtwx\/dwtree/, jtwxApi.getDwTreeData)
+Mock.mock(/\/jtwx\/GetWxTable/, jtwxApi.getWxOverView_Mock)
+Mock.mock(/\/jtwx\/GetWxCountPie/, jtwxApi.getWxCount_Mock)
+Mock.mock(/\/jtwx\/GetWxFundsPie/, jtwxApi.getWxFunds_Mock)
+Mock.mock(/\/jtwx\/GetWxYearCountDnzxBar/, jtwxApi.getWxYearCountDnzx_Mock)
+Mock.mock(/\/jtwx\/GetWxYearCountDnjcBar/, jtwxApi.getWxYearCountDnjc_Mock)
+Mock.mock(/\/jtwx\/GetWxYearCountSnzjBar/, jtwxApi.getWxYearCountSnzj_Mock)
+Mock.mock(/\/jtwx\/GetWxYearCountDnwgBar/, jtwxApi.getWxYearCountDnwg_Mock)
 
 export default Mock

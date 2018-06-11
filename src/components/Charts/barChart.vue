@@ -153,14 +153,14 @@ export default {
       })
     },
     toParentComp(params) {
-      this.$emit('selectBarJx', params)
+      this.$emit('selectBar', params)
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
       const vm = this
       this.chart.on('click', function(params) {
-        vm.toParentComp(params.name)
+        vm.toParentComp(params)
       })
     }
   }

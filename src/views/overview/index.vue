@@ -42,12 +42,12 @@
         <el-tabs v-model="activeName" @tab-click="handleClick" class="el-tabs-container">
           <el-tab-pane label="当前舰型在修在航统计柱状图" name="first">
             <div class='chart-bar-container'>
-              <barChart @selectBarJx="selectBarJx" :chart-data="CountBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
+              <barChart @selectBar="selectBarJx" :chart-data="CountBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
             </div>
           </el-tab-pane>
           <el-tab-pane label="当前舰型维修经费统计柱状图" name="second">
             <div class='chart-bar-container'>
-              <barChart @selectBarJx="selectBarJx" :chart-data="FundBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
+              <barChart @selectBar="selectBarJx" :chart-data="FundBarData" :chart-name="'当前舰型维修经费统计柱状图'"></barChart>
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -311,7 +311,7 @@ export default {
     },
     selectBarJx(params) {
       // 点击柱状图舰型 更新表格数据
-      this.listQuery.paramEjpt = params
+      this.listQuery.paramEjpt = params.name
       this.getList()
     },
     ClickZdRang() {
@@ -337,11 +337,5 @@ export default {
 .card-component-sm {
   min-height: 100px;
   height: 264px;
-}
-.chart-bar-container {
-  position: relative;
-  padding: 20px;
-  width: 100%;
-  height: 400px;
 }
 </style>

@@ -71,8 +71,8 @@ export default {
       filterText: '',
       activeName: 'zdjt',
       activeName2: 'lswxcs',
-      treeType: '',
-      treeText: '',
+      treeType: 'all',
+      treeText: '全海军',
       treeZdjt: [],
       treeFzjt: [],
       treeDwjb: [],
@@ -88,8 +88,8 @@ export default {
       return data.label.indexOf(value) !== -1
     },
     ClickTreeHandle(obj, node, tree) {
-      this.treeType = obj.label
-      this.treeText = obj.type
+      this.treeType = obj.type
+      this.treeText = obj.label
     },
     GetTreeFun() {
       // 获取左侧树结构数据
