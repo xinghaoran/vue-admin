@@ -119,19 +119,6 @@ export default {
       }
       const SeriesData = []
       const SeriesNameList = []
-      // for (let i = chartData.Series.length - 1; i >= 0; i--) {
-      //   const element = chartData.Series[i]
-      //   SeriesData.push({
-      //     name: element.seriesName,
-      //     type: 'bar',
-      //     stack: 'Group', // 名字随意取两序列相同即可，达到堆叠效果使用
-      //     data: element.data,
-      //     label: {
-      //       show: true,
-      //       position: 'inside'
-      //     }
-      //   })
-      // }
       chartData.Series.forEach(element => {
         SeriesNameList.push(element.seriesName)
         SeriesData.push({

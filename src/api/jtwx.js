@@ -111,3 +111,13 @@ export function GetJtWxList_Api(query) {
     data
   })
 }
+export function Test_Api(query) {
+  const data = {
+    query
+  }
+  return request({
+    url: '/Upload/Index',
+    method: 'post',
+    data
+  })
+}

@@ -16,7 +16,7 @@ import store from './store'
 import i18n from './lang' // Internationalization
 import '@/icons' // icon
 import '@/permission' // permission control
-import '@/mock' // 引入mock才可以使mock成功拦截消息，不需要则注释即可
+// import '@/mock' // 引入mock才可以使mock成功拦截消息，不需要则注释即可
 
 // Vue.use(ElementUI, { locale })
 Vue.use(Element, {

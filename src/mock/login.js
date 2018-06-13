@@ -18,7 +18,7 @@ const userMap = {
 }
 
 export default {
-  loginByUsername: config => { //  config 是报文信息
+  loginByUsername: config => { // config 是报文信息
     const { username } = JSON.parse(config.body)
     return userMap[username]
   },
