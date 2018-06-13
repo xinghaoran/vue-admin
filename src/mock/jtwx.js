@@ -1,5 +1,27 @@
 import Mock from 'mockjs'
 
+Mock.Random.extend({
+  xljbs: ['中修', '小修', '坞修', '航修', '坞检'],
+  xljb: function(date) {
+    return this.pick(this.xljbs)
+  }
+})
+
+const List = []
+const count = 200
+for (let i = 0; i < count; i++) {
+  List.push(Mock.mock({
+    xh: Mock.Random.increment(1000),
+    xldw: Mock.Random.cword(3, 7),
+    // xljb: Mock.Random.cword(2, 2),
+    xljb: Mock.Random.xljb(),
+    sjxlkssj: Mock.Random.natural(10000000, 99999999),
+    sjxljssj: Mock.Random.natural(10000000, 99999999),
+    zjf: Mock.Random.natural(10000, 99999),
+    bz: Mock.Random.cword(0, 5)
+  }))
+}
+
 export default {
   getZdTreeData() {
     return [{
@@ -185,11 +207,11 @@ export default {
       value: Mock.mock('@integer(30, 100)')
     },
     {
-      name: '坞检',
+      name: '航修',
       value: Mock.mock('@integer(30, 100)')
     },
     {
-      name: '航修',
+      name: '坞检',
       value: Mock.mock('@integer(30, 100)')
     }
     ]
@@ -211,11 +233,11 @@ export default {
       value: Mock.mock('@float(1000, 5000, 2, 2)')
     },
     {
-      name: '坞检',
+      name: '航修',
       value: Mock.mock('@float(1000, 5000, 2, 2)')
     },
     {
-      name: '航修',
+      name: '坞检',
       value: Mock.mock('@float(1000, 5000, 2, 2)')
     }
     ]
@@ -560,5 +582,42 @@ export default {
       ]
     }
     return wxyearcount
+  },
+  getJtWxList_Mock(config) {
+    const data = JSON.parse(config.body)
+    const page = data.query.page
+    const limit = data.query.limit
+
+    let mockList = List
+
+    // 查询
+    mockList = mockList.filter(item => {
+      if (data.query.xljb && item.xljb.indexOf(data.query.xljb) < 0) return false
+      return true
+    })
+
+    // 排序
+    const compare_xh = function(obj1, obj2) {
+      var val1 = obj1.xh
+      var val2 = obj2.xh
+      if (val1 < val2) {
+        return -1
+      } else if (val1 > val2) {
+        return 1
+      } else {
+        return 0
+      }
+    }
+    mockList = mockList.sort(compare_xh)
+    if (data.query.sort_type === 'descending') {
+      mockList = mockList.reverse()
+    }
+
+    const pageList = mockList.filter((item, index) => index < limit * page && index >= limit * (page - 1))
+
+    return {
+      total: mockList.length,
+      items: pageList
+    }
   }
 }

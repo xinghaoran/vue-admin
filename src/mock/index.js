@@ -47,5 +47,6 @@ Mock.mock(/\/jtwx\/GetWxYearCountDnzxBar/, jtwxApi.getWxYearCountDnzx_Mock)
 Mock.mock(/\/jtwx\/GetWxYearCountDnjcBar/, jtwxApi.getWxYearCountDnjc_Mock)
 Mock.mock(/\/jtwx\/GetWxYearCountSnzjBar/, jtwxApi.getWxYearCountSnzj_Mock)
 Mock.mock(/\/jtwx\/GetWxYearCountDnwgBar/, jtwxApi.getWxYearCountDnwg_Mock)
+Mock.mock(/\/jtwx\/GetJtWxList/, jtwxApi.getJtWxList_Mock)
 
 export default Mock

@@ -18,7 +18,7 @@
         </el-card>
       </el-col>
       <el-col :sm="24" :md="18" :lg="18">
-        <el-tabs v-model="activeName2" type="border-card" style="height:100vh" class="el-tabs-container">
+        <el-tabs v-model="activeName2" type="border-card" style="min-height:100vh" class="el-tabs-container">
           <el-tab-pane label="当前修理计划" name="dqxljh">
             <repair-plan></repair-plan>
           </el-tab-pane>

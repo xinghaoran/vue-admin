@@ -119,7 +119,7 @@
           </el-table-column>
         </el-table>
 
-        <div align="center">
+        <div align="center" style="margin-top:10px">
           <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[5,10,20,30,200]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
           </el-pagination>
         </div>
@@ -280,10 +280,10 @@ export default {
       this.listQuery.page = val
       this.getList()
     },
-    handleSortChange(column, prop, order) {
+    handleSortChange(params) {
       // 排序条件改变时 调用该函数
-      this.listQuery.sort_type = column.order
-      this.listQuery.sort_field = column.prop
+      this.listQuery.sort_type = params.order
+      this.listQuery.sort_field = params.prop
       this.listQuery.page = 1
       this.getList()
     },

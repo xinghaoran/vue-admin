@@ -101,12 +101,37 @@ export default {
     }
   },
   methods: {
+    tooltipFormat(params) {
+      if (!params) return
+      params = params.reverse()
+      let total = 0
+      let items = params[0].name + '<br/>'
+      params.forEach(element => {
+        items += element.marker + element.seriesName + ': ' + element.value + '<br/>'
+        total += element.value
+      })
+
+      return items + '总计: ' + total
+    },
     setOptions(chartData) {
       if (chartData.Series === undefined) {
         return
       }
       const SeriesData = []
       const SeriesNameList = []
+      // for (let i = chartData.Series.length - 1; i >= 0; i--) {
+      //   const element = chartData.Series[i]
+      //   SeriesData.push({
+      //     name: element.seriesName,
+      //     type: 'bar',
+      //     stack: 'Group', // 名字随意取两序列相同即可，达到堆叠效果使用
+      //     data: element.data,
+      //     label: {
+      //       show: true,
+      //       position: 'inside'
+      //     }
+      //   })
+      // }
       chartData.Series.forEach(element => {
         SeriesNameList.push(element.seriesName)
         SeriesData.push({
@@ -127,9 +152,11 @@ export default {
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          }
+          },
+          formatter: this.tooltipFormat
         },
         legend: {
+          show: true,
           data: SeriesNameList
         },
         grid: {

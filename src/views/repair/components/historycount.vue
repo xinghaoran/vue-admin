@@ -50,6 +50,56 @@
         </div>
       </el-card>
     </el-row>
+    <el-row>
+      <el-card class="box-card" shadow="always" style="height:420px">
+        <div slot="header" class="clearfix">
+          <span>舰艇维修列表</span>
+        </div>
+        <div class="card-component-sm">
+          <el-table height="300" border :data="list" @sort-change="handleSortChange" v-loading="listLoading" element-loading-text="给我一点时间" fit highlight-current-row style="width: 100%">
+            <el-table-column width="100px" align="center" label="舷号" sortable="custom" prop="xh">
+              <template slot-scope="scope">
+                <span>{{scope.row.xh}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column min-width="200px" align="center" label="修理单位" sortable="custom" prop="xldw">
+              <template slot-scope="scope">
+                <span>{{scope.row.xldw}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column width="120px" align="center" label="修理级别" sortable="custom" prop="xljb">
+              <template slot-scope="scope">
+                <span>{{scope.row.xljb}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column min-width="120px" align="center" label="修理开始时间" sortable="custom" prop="sjxlkssj">
+              <template slot-scope="scope">
+                <span>{{scope.row.sjxlkssj}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column min-width="120px" align="center" label="修理结束时间" sortable="custom" prop="sjxljssj">
+              <template slot-scope="scope">
+                <span>{{scope.row.sjxljssj}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column min-width="100px" align="center" label="总经费" sortable="custom" prop="zjf">
+              <template slot-scope="scope">
+                <span>{{scope.row.zjf}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column min-width="100px" align="center" label="备注" sortable="custom" prop="bz">
+              <template slot-scope="scope">
+                <span>{{scope.row.bz}}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div align="center" style="margin-top:10px">
+            <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[5,10,20,30,200]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+            </el-pagination>
+          </div>
+        </div>
+      </el-card>
+    </el-row>
   </div>
 </template>
 
@@ -64,7 +114,8 @@ import {
   GetWxYearCountDnzx_Api,
   GetWxYearCountDnjc_Api,
   GetWxYearCountSnzj_Api,
-  GetWxYearCountDnwg_Api
+  GetWxYearCountDnwg_Api,
+  GetJtWxList_Api
 } from '@/api/jtwx'
 
 export default {
@@ -91,6 +142,7 @@ export default {
     this.getWxCountPie()
     this.getWxFundsPie()
     this.getWxYearCountBar()
+    this.getJtWxList()
   },
 
   methods: {
@@ -152,8 +204,32 @@ export default {
     radioSelectChange(selecter) {
       this.getWxYearCountBar()
     },
-    selectBarWxYearXb(params) {
-      console.log(params)
+    selectBarWxYearXb(params) { // 点击柱状图
+      this.listQuery.nf = params.name
+      this.listQuery.xljb = params.seriesName
+      this.listQuery.page = 1
+      this.getJtWxList()
+    },
+    handleSortChange(params) { // { column, prop, order }
+      this.listQuery.sort_type = params.order
+      this.listQuery.sort_field = params.props
+      this.listQuery.page = 1
+      this.getJtWxList()
+    },
+    handleSizeChange(val) {
+      this.listQuery.limit = val
+      this.getJtWxList()
+    },
+    handleCurrentChange(val) {
+      this.listQuery.page = val
+      this.getJtWxList()
+    },
+    getJtWxList() {
+      GetJtWxList_Api(this.listQuery).then(response => {
+        this.list = response.data.items
+        this.total = response.data.total
+        this.listLoading = false
+      })
     }
   },
 
@@ -167,7 +243,18 @@ export default {
       wxCountPieData: [],
       wxFundsPieData: [],
       wxYearCountBarData: {},
-      radioBarType: '1'
+      radioBarType: '1',
+      list: [],
+      total: null,
+      listLoading: true,
+      listQuery: {
+        page: 1,
+        limit: 5,
+        sort_field: 'xh',
+        sort_type: 'ascending',
+        nf: null,
+        xljb: null
+      }
     }
   },
 
@@ -188,6 +275,9 @@ export default {
       this.getWxCountPie()
       this.getWxFundsPie()
       this.getWxYearCountBar()
+      this.listQuery.nf = null
+      this.listQuery.xljb = null
+      this.getJtWxList()
     }
   }
 }

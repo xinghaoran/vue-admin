@@ -101,3 +101,13 @@ export function GetWxYearCountDnwg_Api(treeText, treeType) {
     data
   })
 }
+export function GetJtWxList_Api(query) {
+  const data = {
+    query
+  }
+  return request({
+    url: '/jtwx/GetJtWxList',
+    method: 'post',
+    data
+  })
+}
