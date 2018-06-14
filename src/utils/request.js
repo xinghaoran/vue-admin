@@ -1,8 +1,13 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import {
+  Message,
+  MessageBox
+} from 'element-ui'
 // import { Message } from 'element-ui'
 import store from '../store'
-import { getToken } from '@/utils/auth'
+import {
+  getToken
+} from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
@@ -24,11 +29,23 @@ service.interceptors.request.use(config => {
 
 // respone拦截器
 service.interceptors.response.use(
-  response => response,
   response => {
-  /**
-  * code为非20000是抛错 可结合自己业务进行修改
-  */
+    // 处理流
+    if (response.headers && response.headers['content-type'] === 'application/octet-stream') {
+      const config = response.config
+      if (config.method === 'post') {
+        downloadPost(config)
+      } else if (config.method === 'get') {
+        downloadGet(config)
+      }
+      return
+    }
+    return response
+  },
+  response => {
+    /**
+     * code为非20000是抛错 可结合自己业务进行修改
+     */
     const res = response.data
     if (res.code !== 20000) {
       Message({
@@ -45,7 +62,7 @@ service.interceptors.response.use(
           type: 'warning'
         }).then(() => {
           store.dispatch('FedLogOut').then(() => {
-            location.reload()// 为了重新实例化vue-router对象 避免bug
+            location.reload() // 为了重新实例化vue-router对象 避免bug
           })
         })
       }
@@ -56,7 +73,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error)// for debug
+    console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',
@@ -65,5 +82,41 @@ service.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+const downloadPost = (config) => {
+  const url = config.url
+  const data = JSON.parse(config.data)
+  const form = document.createElement('form')
+  form.action = url
+  form.method = 'post'
+  form.style.display = 'none'
+  Object.keys(data).forEach(key => {
+    const input = document.createElement('input')
+    input.name = key
+    input.value = data[key]
+    form.appendChild(input)
+  })
+  const button = document.createElement('input')
+  button.type = 'submit'
+  form.appendChild(button)
+  document.body.appendChild(form)
+  form.submit()
+  document.body.removeChild(form)
+}
+
+const downloadGet = (config) => {
+  const params = []
+  for (const item in config.params) {
+    params.push(`${item}=${config.params[item]}`)
+  }
+  const url = params.length ? `${config.url}?${params.join('&')}` : `${config.url}`
+  const iframe = document.createElement('iframe')
+  iframe.style.display = 'none'
+  iframe.src = url
+  iframe.onload = function() {
+    document.body.removeChild(iframe)
+  }
+  document.body.appendChild(iframe)
+}
 
 export default service

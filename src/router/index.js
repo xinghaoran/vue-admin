@@ -5,8 +5,10 @@ const _import = require('./_import_' + process.env.NODE_ENV)
 // 根据生产、开发环境的不同决定是否使用路由懒加载
 // 路由懒加载目的在于将不同路由对应的组件分割成不同的代码块
 // 然后当路由被访问的时候才加载对应组件，这样就更加高效
-// 开发环境：module.exports = file => require('@/views/' + file + '.vue').default —— 一波加载
-// 生产环境：module.exports = file => () => import('@/views/' + file + '.vue') —— 延迟加载
+// 开发环境：module.exports = file => require('@/views/' + file + '.vue').default
+// require是运行时调用，所以require理论上可以运用在代码的任何地方
+// 生产环境：module.exports = file => () => import('@/views/' + file + '.vue')
+// import是编译时调用，所以必须放在文件开头
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
@@ -174,6 +176,19 @@ export const asyncRouterMap = [{
   //     meta: { title: 'overview', icon: 'international' }
   //   }]
   // },
+{
+  path: '/document',
+  component: Layout,
+  children: [{
+    path: 'index',
+    component: _import('documentmanager/index'),
+    name: 'document',
+    meta: {
+      title: 'document',
+      icon: 'international'
+    }
+  }]
+},
 {
   path: '/shipinfo',
   component: Layout,

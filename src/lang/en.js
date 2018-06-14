@@ -52,7 +52,8 @@ export default {
     tree: 'Tree',
     shipinfo: 'ShipInfo',
     overview: 'Overview',
-    repair: 'Repair'
+    repair: 'Repair',
+    document: 'Document'
   },
   navbar: {
     logOut: 'Log Out',

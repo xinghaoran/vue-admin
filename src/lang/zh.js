@@ -52,7 +52,8 @@ export default {
     i18n: '国际化',
     shipinfo: '舰艇信息',
     overview: '舰艇概况',
-    repair: '舰艇维修'
+    repair: '舰艇维修',
+    document: '文档管理'
   },
   navbar: {
     logOut: '退出登录',
