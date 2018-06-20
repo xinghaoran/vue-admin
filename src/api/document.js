@@ -30,11 +30,11 @@ export function getFileList(id) {
 }
 
 export function getDocInfoList(query) {
-  // const data = query
+  const data = query
   return request({
     url: '/Upload/GetDocInfoList',
-    method: 'post'
-    // data
+    method: 'post',
+    data
   })
 }
 

@@ -218,7 +218,9 @@ export default {
     },
     handlePreview(file) {
       // 点击文件列表中已上传的文件时的钩子
-      outPutFile(file.file_number)
+      outPutFile(file.file_number).then(response => {
+        // this.download(response)
+      })
       // window.open(
       //   process.env.BASE_API +
       //     '/Upload/UpLoad_file?file_number=' +
@@ -276,12 +278,18 @@ export default {
       })
     },
     handleDel(row) {
-      delDocument(row.id).then(response => {
-        this.getDocList()
-      })
+      this.$confirm(`确定移除 ${row.dw}？`)
+        .then(success => {
+          delDocument(row.id).then(response => {
+            this.getDocList()
+          })
+        })
+        .catch(fail => {
+          console.log(fail)
+        })
     },
     getDocList() {
-      getDocInfoList().then(response => {
+      getDocInfoList(this.listQuery).then(response => {
         this.list = response.data.docList
         this.total = response.data.total
         this.listLoading = false
@@ -293,20 +301,22 @@ export default {
     },
     handleCurrentChange(val) {
       this.listQuery.page = val
-    },
-    // 下载文件
-    download(data) {
-      if (!data) {
-        return
-      }
-      const url = window.URL.createObjectURL(new Blob([data]))
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      link.href = url
-      link.setAttribute('download', 'txt')
-      document.body.appendChild(link)
-      link.click()
     }
+    // ,
+    // // 下载文件
+    // download(data) {
+    //   console.log(data)
+    //   if (!data) {
+    //     return
+    //   }
+    //   const url = window.URL.createObjectURL(new Blob([data]))
+    //   const link = document.createElement('a')
+    //   link.style.display = 'none'
+    //   link.href = url
+    //   link.setAttribute('download', 'excel.xlsx')
+    //   document.body.appendChild(link)
+    //   link.click()
+    // }
   },
   filters: {
     changetodate(val) {

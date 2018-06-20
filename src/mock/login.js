@@ -19,8 +19,8 @@ const userMap = {
 
 export default {
   loginByUsername: config => { // config 是报文信息
-    const { username } = JSON.parse(config.body)
-    return userMap[username]
+    const { account } = JSON.parse(config.body)
+    return userMap[account]
   },
   getUserInfo: config => {
     const { token } = param2Obj(config.url) // https://api-dev/user/info?token=admin -> {token: "admin"}

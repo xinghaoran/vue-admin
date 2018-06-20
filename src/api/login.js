@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function login(username, password) {
+export function login(account, password) {
   const data = {
-    username,
+    account,
     password
   }
   return request({
@@ -17,7 +17,7 @@ export function getInfo(token) {
     token
   }
   return request({
-    url: '/user/info',
+    url: '/User/info',
     method: 'post',
     data
     // params: { token }
@@ -26,7 +26,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/login/logout',
+    url: '/Login/logout',
     method: 'post'
   })
 }

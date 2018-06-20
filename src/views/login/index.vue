@@ -7,11 +7,11 @@
         <h3 class="title">vue-element-admin</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="account">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user"/>
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username"/>
+        <el-input name="account" type="text" v-model="loginForm.account" autoComplete="on" placeholder="account"/>
       </el-form-item>
 
       <el-form-item prop="password">
@@ -30,7 +30,7 @@
       </el-button>
       <!--</el-form-item>-->
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
+        <span style="margin-right:20px;">account: admin</span>
         <span> password: admin</span>
       </div>
     </el-form>
@@ -59,11 +59,11 @@
       }
       return {
         loginForm: {
-          // username: 'admin',
-          // password: 'admin'
+          account: 'admin',
+          password: 'admin'
         },
         loginRules: {
-          username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+          account: [{ required: true, trigger: 'blur', validator: validateUsername }],
           password: [{ required: true, trigger: 'blur', validator: validatePass }]
         },
         loading: false,
