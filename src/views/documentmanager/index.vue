@@ -2,7 +2,7 @@
   <div class="app-container">
 
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="单位" v-model="listQuery.dw">
+      <el-input prefix-icon="el-icon-search" @keyup.enter.native="handleFilter" @change="handleFilter" style="width: 200px;" class="filter-item" placeholder="单位或备注" v-model="listQuery.dw">
       </el-input>
       <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
@@ -144,12 +144,12 @@ export default {
         page: 1,
         limit: 20,
         dw: null,
-        sort: '+id'
+        sort: '+'
       },
       total: null,
       sortOptions: [
-        { label: 'ID Ascending', key: '+id' },
-        { label: 'ID Descending', key: '-id' }
+        { label: '时间升序', key: '+' },
+        { label: '时间降序', key: '-' }
       ],
       pickerOptions: {
         disabledDate(time) {
@@ -295,12 +295,16 @@ export default {
         this.listLoading = false
       })
     },
-    handleFilter() {},
+    handleFilter() {
+      this.getDocList()
+    },
     handleSizeChange(val) {
       this.listQuery.limit = val
+      this.getDocList()
     },
     handleCurrentChange(val) {
       this.listQuery.page = val
+      this.getDocList()
     }
     // ,
     // // 下载文件

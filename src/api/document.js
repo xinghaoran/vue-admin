@@ -3,7 +3,7 @@ import request from '@/utils/request'
 export function addDocumentInfo(docinfo) {
   const data = docinfo
   return request({
-    url: '/Upload/AddDocInfo',
+    url: '/Doc/AddDocInfo',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function addDocumentInfo(docinfo) {
 export function updateDocumentInfo(docinfo) {
   const data = docinfo
   return request({
-    url: '/Upload/UpdateDocInfo',
+    url: '/Doc/UpdateDocInfo',
     method: 'post',
     data
   })
@@ -23,7 +23,7 @@ export function getFileList(id) {
     id
   }
   return request({
-    url: '/Upload/GetFileList',
+    url: '/Doc/GetFileList',
     method: 'post',
     data
   })
@@ -32,7 +32,7 @@ export function getFileList(id) {
 export function getDocInfoList(query) {
   const data = query
   return request({
-    url: '/Upload/GetDocInfoList',
+    url: '/Doc/GetDocInfoList',
     method: 'post',
     data
   })
@@ -43,7 +43,7 @@ export function outPutFile(file_number) {
     file_number
   }
   return request({
-    url: '/Upload/OutPutFile',
+    url: '/Doc/OutPutFile',
     method: 'post',
     data
   })
@@ -54,7 +54,7 @@ export function delFile(file_number) {
     file_number
   }
   return request({
-    url: '/Upload/DelFile',
+    url: '/Doc/DelFile',
     method: 'post',
     data
   })
@@ -65,7 +65,7 @@ export function delDocument(id) {
     id
   }
   return request({
-    url: '/Upload/DelDocument',
+    url: '/Doc/DelDocument',
     method: 'post',
     data
   })

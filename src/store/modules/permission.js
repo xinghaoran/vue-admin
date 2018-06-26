@@ -46,12 +46,13 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
-        let accessedRouters
-        if (roles.indexOf('admin') >= 0) {
-          accessedRouters = asyncRouterMap // 管理员取得全部菜单项
-        } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles) // 否则根据权限筛选菜单项
-        }
+        // let accessedRouters
+        const accessedRouters = filterAsyncRouter(asyncRouterMap, roles) // 否则根据权限筛选菜单项
+        // if (roles.indexOf('admin') >= 0) {
+        //   accessedRouters = asyncRouterMap // 管理员取得全部菜单项
+        // } else {
+        //   accessedRouters = filterAsyncRouter(asyncRouterMap, roles) // 否则根据权限筛选菜单项
+        // }
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

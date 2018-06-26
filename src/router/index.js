@@ -43,7 +43,6 @@ export const constantRouterMap = [
     component: _import('errorPage/404'),
     hidden: true
   },
-
   // {
   //   path: '/',
   //   component: Layout,
@@ -69,69 +68,69 @@ export const constantRouterMap = [
         noCache: true
       }
     }]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: {
-      title: 'example',
-      icon: 'example'
-    },
-    children: [{
-      path: 'table',
-      name: 'Table',
-      // 两种设置component方法都可以，前者为函数形式，后者配置形式
-      // component: () => import('@/views/table/index'),
-      component: _import('table/index'),
-      meta: {
-        title: 'table',
-        icon: 'table'
-      }
-    },
-    {
-      path: 'tree',
-      name: 'Tree',
-      // component: () => import('@/views/tree/index'),
-      component: _import('tree/index'),
-      meta: {
-        title: 'tree',
-        icon: 'tree'
-      }
-    }
-    ]
-  },
-  {
-    path: '/charts',
-    component: Layout,
-    // redirect: 'noredirect',
-    alwaysShow: true,
-    name: 'charts',
-    meta: {
-      title: 'charts',
-      icon: 'chart'
-    },
-    children: [{
-      path: 'mixchart',
-      component: _import('charts/mixChart'),
-      name: 'mixChart',
-      meta: {
-        title: 'mixChart',
-        noCache: true
-      }
-    },
-    {
-      path: 'linechart',
-      component: _import('charts/LineChart'),
-      name: 'lineChart',
-      meta: {
-        title: 'lineChart',
-        noCache: true
-      }
-    }
-    ]
   }
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: {
+  //     title: 'example',
+  //     icon: 'example'
+  //   },
+  //   children: [{
+  //     path: 'table',
+  //     name: 'Table',
+  //     // 两种设置component方法都可以，前者为函数形式，后者配置形式
+  //     // component: () => import('@/views/table/index'),
+  //     component: _import('table/index'),
+  //     meta: {
+  //       title: 'table',
+  //       icon: 'table'
+  //     }
+  //   },
+  //   {
+  //     path: 'tree',
+  //     name: 'Tree',
+  //     // component: () => import('@/views/tree/index'),
+  //     component: _import('tree/index'),
+  //     meta: {
+  //       title: 'tree',
+  //       icon: 'tree'
+  //     }
+  //   }
+  //   ]
+  // },
+  // {
+  //   path: '/charts',
+  //   component: Layout,
+  //   // redirect: 'noredirect',
+  //   alwaysShow: true,
+  //   name: 'charts',
+  //   meta: {
+  //     title: 'charts',
+  //     icon: 'chart'
+  //   },
+  //   children: [{
+  //     path: 'mixchart',
+  //     component: _import('charts/mixChart'),
+  //     name: 'mixChart',
+  //     meta: {
+  //       title: 'mixChart',
+  //       noCache: true
+  //     }
+  //   },
+  //   {
+  //     path: 'linechart',
+  //     component: _import('charts/LineChart'),
+  //     name: 'lineChart',
+  //     meta: {
+  //       title: 'lineChart',
+  //       noCache: true
+  //     }
+  //   }
+  //   ]
+  // }
 ]
 
 export const asyncRouterMap = [{
@@ -139,7 +138,7 @@ export const asyncRouterMap = [{
   component: Layout,
   hidden: false,
   meta: {
-    roles: ['admin']
+    roles: ['zb']
   }, // 如果不設置此處的權限则会出现空白菜单
   children: [{
     path: 'index',
@@ -149,7 +148,7 @@ export const asyncRouterMap = [{
     meta: {
       title: 'form',
       icon: 'form',
-      roles: ['admin']
+      roles: ['zb']
     }
   }]
 },
@@ -166,26 +165,20 @@ export const asyncRouterMap = [{
     }
   }]
 },
-  // {
-  //   path: '/overview',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'index',
-  //     component: _import('overview/index'),
-  //     name: 'overview',
-  //     meta: { title: 'overview', icon: 'international' }
-  //   }]
-  // },
 {
   path: '/document',
   component: Layout,
+  meta: {
+    roles: ['admin', 'editor']
+  }, // 如果不設置此處的權限则会出现空白菜单
   children: [{
     path: 'index',
     component: _import('documentmanager/index'),
     name: 'document',
     meta: {
       title: 'document',
-      icon: 'international'
+      icon: 'international',
+      roles: ['admin', 'editor']
     }
   }]
 },
@@ -196,7 +189,8 @@ export const asyncRouterMap = [{
   name: 'ShipInfo',
   meta: {
     title: 'shipinfo',
-    icon: 'example'
+    icon: 'example',
+    roles: ['zb']
   },
   children: [{
     path: 'repair',
@@ -206,7 +200,8 @@ export const asyncRouterMap = [{
     component: _import('repair/Repair'),
     meta: {
       title: 'repair',
-      icon: 'table'
+      icon: 'table',
+      roles: ['zb']
     }
   },
   {
@@ -216,7 +211,8 @@ export const asyncRouterMap = [{
     component: _import('overview/index'),
     meta: {
       title: 'overview',
-      icon: 'international'
+      icon: 'international',
+      roles: ['zb']
     }
   }
   ]
