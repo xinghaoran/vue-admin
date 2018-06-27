@@ -139,7 +139,7 @@ export const asyncRouterMap = [
     component: Layout,
     hidden: false,
     meta: {
-      roles: ['zb']
+      roles: ['jg', 'jd']
     }, // 如果不設置此處的權限则会出现空白菜单
     children: [{
       path: 'index',
@@ -149,7 +149,7 @@ export const asyncRouterMap = [
       meta: {
         title: 'form',
         icon: 'form',
-        roles: ['zb']
+        roles: ['jg', 'jd']
       }
     }]
   },
@@ -191,7 +191,7 @@ export const asyncRouterMap = [
     meta: {
       title: 'shipinfo',
       icon: 'example',
-      roles: ['zb', 'admin']
+      roles: ['jg', 'jd']
     },
     children: [{
       path: 'repair',
@@ -202,7 +202,7 @@ export const asyncRouterMap = [
       meta: {
         title: 'repair',
         icon: 'table',
-        roles: ['zb', 'admin']
+        roles: ['jg', 'jd']
       }
     },
     {
@@ -213,7 +213,7 @@ export const asyncRouterMap = [
       meta: {
         title: 'overview',
         icon: 'international',
-        roles: ['zb', 'admin']
+        roles: ['jg', 'jd']
       }
     }
     ]

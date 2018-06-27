@@ -4,7 +4,7 @@
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm"
              label-position="left">
       <div class="title-container">
-        <h3 class="title">vue-element-admin</h3>
+        <h3 class="title">vue-admin</h3>
       </div>
 
       <el-form-item prop="account">
@@ -51,16 +51,16 @@
         }
       }
       const validatePass = (rule, value, callback) => {
-        if (value.length < 5) {
-          callback(new Error('密码不能小于5位'))
+        if (value.length < 0) {
+          callback(new Error('密码不能小于0位'))
         } else {
           callback()
         }
       }
       return {
         loginForm: {
-          account: 'admin',
-          password: 'admin'
+          account: 'bzc',
+          password: 'bzc'
         },
         loginRules: {
           account: [{ required: true, trigger: 'blur', validator: validateUsername }],

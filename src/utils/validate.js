@@ -3,8 +3,13 @@
  */
 
 export function isvalidUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+  if (str !== '') {
+    return true
+  } else {
+    return false
+  }
+  // const valid_map = ['admin', 'editor', 'bzc', 'dhjd', 'nhjd', 'bhjd']
+  // return valid_map.indexOf(str.trim()) >= 0
 }
 
 /* 合法uri*/
@@ -30,4 +35,3 @@ export function validatAlphabets(str) {
   const reg = /^[A-Za-z]+$/
   return reg.test(str)
 }
-

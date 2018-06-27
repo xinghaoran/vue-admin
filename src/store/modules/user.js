@@ -54,6 +54,7 @@ const user = {
           commit('SET_TOKEN', data.token)
           resolve()
         }).catch(error => {
+          alert('登陆失败')
           reject(error)
         })
       })
