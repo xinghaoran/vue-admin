@@ -3,15 +3,34 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
+    user: '',
+    status: '',
+    code: '',
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    introduction: '',
+    roles: [],
+    setting: {
+      articlePlatform: []
+    }
   },
 
   mutations: {
+    SET_CODE: (state, code) => {
+      state.code = code
+    },
     SET_TOKEN: (state, token) => {
       state.token = token
+    },
+    SET_INTRODUCTION: (state, introduction) => {
+      state.introduction = introduction
+    },
+    SET_SETTING: (state, setting) => {
+      state.setting = setting
+    },
+    SET_STATUS: (state, status) => {
+      state.status = status
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -45,9 +64,14 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response.data
-          commit('SET_ROLES', data.roles)
+          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+            commit('SET_ROLES', data.roles)
+          } else {
+            reject('getInfo: roles must be a non-null array !')
+          }
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
+          commit('SET_INTRODUCTION', data.introduction)
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -77,6 +101,21 @@ const user = {
         resolve()
       })
     }
+    // // 动态修改权限
+    // ChangeRoles({ commit }, role) {
+    //   return new Promise(resolve => {
+    //     commit('SET_TOKEN', role)
+    //     setToken(role)
+    //     getInfo(role).then(response => {
+    //       const data = response.data
+    //       commit('SET_ROLES', data.roles)
+    //       commit('SET_NAME', data.name)
+    //       commit('SET_AVATAR', data.avatar)
+    //       commit('SET_INTRODUCTION', data.introduction)
+    //       resolve()
+    //     })
+    //   })
+    // }
   }
 }
 

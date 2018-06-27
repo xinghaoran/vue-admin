@@ -133,95 +133,96 @@ export const constantRouterMap = [
   // }
 ]
 
-export const asyncRouterMap = [{
-  path: '/form',
-  component: Layout,
-  hidden: false,
-  meta: {
-    roles: ['zb']
-  }, // 如果不設置此處的權限则会出现空白菜单
-  children: [{
-    path: 'index',
-    name: 'Form',
-    // component: () => import('@/views/form/index'),
-    component: _import('form/index'),
+export const asyncRouterMap = [
+  {
+    path: '/form',
+    component: Layout,
+    hidden: false,
     meta: {
-      title: 'form',
-      icon: 'form',
       roles: ['zb']
-    }
-  }]
-},
-{
-  path: '/i18n',
-  component: Layout,
-  children: [{
-    path: 'index',
-    component: _import('i18n-demo/index'),
-    name: 'i18n',
-    meta: {
-      title: 'i18n',
-      icon: 'international'
-    }
-  }]
-},
-{
-  path: '/document',
-  component: Layout,
-  meta: {
-    roles: ['admin', 'editor']
-  }, // 如果不設置此處的權限则会出现空白菜单
-  children: [{
-    path: 'index',
-    component: _import('documentmanager/index'),
-    name: 'document',
-    meta: {
-      title: 'document',
-      icon: 'international',
-      roles: ['admin', 'editor']
-    }
-  }]
-},
-{
-  path: '/shipinfo',
-  component: Layout,
-  redirect: '/shipinf/overview',
-  name: 'ShipInfo',
-  meta: {
-    title: 'shipinfo',
-    icon: 'example',
-    roles: ['zb']
-  },
-  children: [{
-    path: 'repair',
-    name: 'Repair',
-    // 两种设置component方法都可以，前者为函数形式，后者配置形式
-    // component: () => import('@/views/table/index'),
-    component: _import('repair/Repair'),
-    meta: {
-      title: 'repair',
-      icon: 'table',
-      roles: ['zb']
-    }
+    }, // 如果不設置此處的權限则会出现空白菜单
+    children: [{
+      path: 'index',
+      name: 'Form',
+      // component: () => import('@/views/form/index'),
+      component: _import('form/index'),
+      meta: {
+        title: 'form',
+        icon: 'form',
+        roles: ['zb']
+      }
+    }]
   },
   {
-    path: 'overview',
-    name: 'Overview',
-    // component: () => import('@/views/tree/index'),
-    component: _import('overview/index'),
+    path: '/i18n',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: _import('i18n-demo/index'),
+      name: 'i18n',
+      meta: {
+        title: 'i18n',
+        icon: 'international'
+      }
+    }]
+  },
+  {
+    path: '/document',
+    component: Layout,
     meta: {
-      title: 'overview',
-      icon: 'international',
-      roles: ['zb']
+      roles: ['admin', 'editor']
+    }, // 如果不設置此處的權限则会出现空白菜单
+    children: [{
+      path: 'index',
+      component: _import('documentmanager/index'),
+      name: 'document',
+      meta: {
+        title: 'document',
+        icon: 'international',
+        roles: ['admin', 'editor']
+      }
+    }]
+  },
+  {
+    path: '/shipinfo',
+    component: Layout,
+    redirect: '/shipinf/overview',
+    name: 'ShipInfo',
+    meta: {
+      title: 'shipinfo',
+      icon: 'example',
+      roles: ['zb', 'admin']
+    },
+    children: [{
+      path: 'repair',
+      name: 'Repair',
+      // 两种设置component方法都可以，前者为函数形式，后者配置形式
+      // component: () => import('@/views/table/index'),
+      component: _import('repair/Repair'),
+      meta: {
+        title: 'repair',
+        icon: 'table',
+        roles: ['zb', 'admin']
+      }
+    },
+    {
+      path: 'overview',
+      name: 'Overview',
+      // component: () => import('@/views/tree/index'),
+      component: _import('overview/index'),
+      meta: {
+        title: 'overview',
+        icon: 'international',
+        roles: ['zb', 'admin']
+      }
     }
+    ]
+  },
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
   }
-  ]
-},
-{
-  path: '*',
-  redirect: '/404',
-  hidden: true
-}
 ]
 
 export default new Router({
